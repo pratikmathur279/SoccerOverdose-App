@@ -1,1 +1,1 @@
-create-react-native-app myAlligatorFace
+SoccerOverdose Mobile App
