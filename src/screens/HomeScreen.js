@@ -51,9 +51,9 @@ export default class HomeScreen extends React.Component {
             </Text>
           </View>
 
-          <View>
+          {/* <View>
               <UserModal title="Login" text="You need to login to continue"/>
-          </View>
+          </View> */}
 
           <View style={styles.helpContainer}>
             <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>

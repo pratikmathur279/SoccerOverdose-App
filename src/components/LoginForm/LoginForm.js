@@ -7,10 +7,10 @@ export default LoginForm = (props) => {
     return(
         <View>
             <View style={styles.LoginInput}>
-                <Input onChangeText={(text)=>props.onChange(text, 'username')} placeholder="Username" name="username" style={styles.LoginInput} />
+                <Input onChangeText={(text)=>props.onChange(text, 'username')} placeholder="Username" name="username" style={styles.LoginInput} autoCapitalize='none' />
             </View>
             <View>
-                <Input secureTextEntry={true} placeholder="Password" name="password" onChangeText={(text)=>props.onChange(text, 'password')} style={styles.LoginInput} />
+                <Input secureTextEntry={true} placeholder="Password" name="password" onChangeText={(text)=>props.onChange(text, 'password')} style={styles.LoginInput} autoCapitalize='none' />
             </View>
             
             <View style={styles.LoginButton}>

@@ -6,7 +6,11 @@ import { ExpoLinksView } from '@expo/samples';
 import LeaguesBuilder from '../components/LeaguesBuilder/LeaguesBuilder';
 
 import CustomHeader from '../navigation/CustomHeader';
+
 export default class LeaguesScreen extends React.Component {
+  contructor(){
+    this.refresh = this.refresh.bind(this);
+  }
   static navigationOptions = {
     title: 'Top Leagues',
     headerStyle: { backgroundColor: '#2196f3', height: 50 },
@@ -14,8 +18,11 @@ export default class LeaguesScreen extends React.Component {
   };
 
   refresh(){
+    console.log("refresh");
     return new Promise((resolve) => {
-      setTimeout(()=>{resolve()}, 2000)
+      setTimeout(()=>{
+        console.log("refreshed");
+        resolve()}, 2000)
     });
   }
 

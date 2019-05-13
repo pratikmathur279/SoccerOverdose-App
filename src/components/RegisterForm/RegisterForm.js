@@ -10,14 +10,13 @@ export default RegisterForm = (props) => {
                 <Input onChangeText={(text)=>props.onChange(text, 'name')} placeholder="Name" name="name" style={styles.RegisterInput} />
             </View>
             <View style={styles.RegisterInput}>
-                <Input onChangeText={(text)=>props.onChange(text, 'email')} placeholder="Email" name="email" style={styles.RegisterInput}/>
+                <Input onChangeText={(text)=>props.onChange(text, 'email')} placeholder="Email" name="email" style={styles.RegisterInput} autoCapitalize='none' />
             </View>
             <View style={styles.RegisterInput}>
-                <Input onChangeText={(text)=>props.onChange(text, 'username')} placeholder="Username" name="Username" style={styles.RegisterInput}/>
+                <Input onChangeText={(text)=>props.onChange(text, 'username')} placeholder="Username" name="Username" style={styles.RegisterInput} autoCapitalize='none' />
             </View>
             <View style={styles.RegisterInput}>
-                <Input secureTextEntry={true} placeholder="Password" name="password" onChangeText={(text)=>props.onChange(text, 'password')} style={styles.RegisterInput}
-              />
+                <Input secureTextEntry={true} placeholder="Password" name="password" onChangeText={(text)=>props.onChange(text, 'password')} style={styles.RegisterInput} autoCapitalize='none' />
             </View>
             <View style={styles.RegisterInput}>
                 <Input onChangeText={(text)=>props.onChange(text, 'favorite_team')} placeholder="Favorite Team" name="favorite_team" style={styles.RegisterInput}/>

@@ -11,7 +11,7 @@ export default class UserModal extends Component {
     constructor(props){
       super(props);
       this.state = {
-        isModalVisible: true,
+        isModalVisible: false,
         text: props.text,
         loading: false,
         error: '',
@@ -27,7 +27,8 @@ export default class UserModal extends Component {
           password: '',
           favorite_team: ''
         },
-        showLogin: true
+        showLogin: true,
+        isLoggedIn: false
       };
       this.actions = new Actions();
     }
@@ -36,6 +37,22 @@ export default class UserModal extends Component {
     console.log(props);
   }
   
+  async componentWillMount(){
+    let temp = await AsyncStorage.getItem('userId') ? true : false;
+    console.log("came here for " + temp);
+    let state = Object.assign({}, this.state);
+    state.isLoggedIn = temp;
+    this.setState(state);
+  }
+
+  // async componentWillUpdate(){
+  //   let temp = await AsyncStorage.getItem('userId') ? true : false;
+  //   console.log("came here for " + temp);
+  //   let state = Object.assign({}, this.state);
+  //   state.isLoggedIn = temp;
+  //   this.setState(state);
+  // }
+
   Login = () => {
     console.log(this.state.Login.username);
     let state = Object.assign({}, this.state);
@@ -45,7 +62,8 @@ export default class UserModal extends Component {
         console.log(res);
           let temp = await AsyncStorage.setItem('userId', (this.state.Login.username));
           console.log(temp);
-          this.setState({ isModalVisible: !this.state.isModalVisible})  
+          this.setState({ isModalVisible: !this.state.isModalVisible});
+          this.componentWillMount();  
       }
       else{
         console.log(res);
@@ -100,10 +118,12 @@ export default class UserModal extends Component {
   
   logout = async () => {
     await AsyncStorage.removeItem('userId');
-    alert("You have successfully logged out!");
+    this.setState({ isLoggedIn: false });
+    // alert("You have successfully logged out!");
   }
 
   toggleModal = () => {
+    console.log("here");
     this.setState({ isModalVisible: !this.state.isModalVisible });
   };
 
@@ -115,8 +135,14 @@ export default class UserModal extends Component {
 
     return (
       <View>
-        <Button title={this.state.title} onPress={this.toggleModal} />
-        <Button title="Logout" onPress={this.logout} />
+        <TouchableOpacity onPress={this.toggleModal} style={styles.ProfileButton}>
+          <Icon.Ionicons
+                name="ios-contact"
+                size={36}
+                color="#000000"
+              />
+        </TouchableOpacity>
+        
         <Modal 
             isVisible={this.state.isModalVisible} 
             deviceWidth={deviceWidth}
@@ -133,8 +159,28 @@ export default class UserModal extends Component {
                 color="#000000"
               />
           </TouchableOpacity>
-            <View style={styles.LogoContainer}>
-              <Image style={styles.LogoImage} source={require('../../assets/images/Logo/logo-1.png')} />
+          {this.state.isLoggedIn ? 
+            <View>
+              <Text>LoggedIn</Text>
+              <Text>LoggedIn</Text>
+              <Text>LoggedIn</Text>
+              <Text>LoggedIn</Text>
+              <Text>LoggedIn</Text>
+              <Text>LoggedIn</Text>
+              <Text>LoggedIn</Text>
+              <Text>LoggedIn</Text>
+              <Text>LoggedIn</Text>
+              <Text>LoggedIn</Text>
+              <Text>LoggedIn</Text>
+              <Text>LoggedIn</Text>
+              <Text>LoggedIn</Text>
+
+              <Button style={[styles.LogoutButton]} title="Logout" onPress={this.logout} />
+              </View>
+          :
+            <View>
+              <View style={styles.LogoContainer}>
+              <Image style={styles.LogoImage} source={require('../../assets/images/Logo/soccerod-new.jpeg')} />
             </View>
             {this.state.showLogin ? 
               <View style={styles.LoginForm}>
@@ -160,6 +206,13 @@ export default class UserModal extends Component {
                 <Button title="Click here" onPress={this.toggleForm} />
               </View>
             }
+            </View>  
+
+          }
+
+
+
+            
 
           </View>
         </Modal>
@@ -173,9 +226,16 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center'
   },
+  ProfileButton: {
+    position: 'relative',
+    marginLeft: 75
+  },
   FlexContainer: {
     marginTop: 20,
     alignItems: 'center'
+  },
+  LogoutButton: {
+    marginTop: 300
   },
   CloseButton: {
     position: 'absolute',
