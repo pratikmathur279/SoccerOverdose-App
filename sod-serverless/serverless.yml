@@ -1,0 +1,162 @@
+service: sod-serverless
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+plugins:
+  - serverless-domain-manager
+
+# custom:
+#   secrets: ${file(secrets.json)}
+
+  # customDomain:
+  #   domainName: data.pratikmathur.com
+  #   basePath: ''
+  #   stage: ${self:provider.stage}
+  #   createRoute53Record: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  environment:
+    # JWT_SECRET: ${self:custom.secrets.JWT_SECRET}
+    USERS_TABLE: { "Ref": "UsersDynamoTable" } 
+    # USERS_ACTIVITY_TABLE: { "Ref": "UserActivityDynamoTable"}
+    # FEED_TABLE: { "Ref": "FeedDynamoTable" }
+    MESSAGES_TABLE: { "Ref": "MessagesDynamoTable"}
+    FORUMS_TABLE: { "Ref": "ForumsDynamoTable"}
+    EMAIL: "pratikmathur279@gmail.com"
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+        - lambda:InvokeAsync
+      Resource: "*"
+
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: 
+        - { "Fn::GetAtt": ["ForumsDynamoTable", "Arn"] }
+        - { "Fn::GetAtt": ["MessagesDynamoTable", "Arn"] }
+        - { "Fn::GetAtt": ["UsersDynamoTable", "Arn"] }
+
+    - Effect: "Allow"
+      Action:
+        - "ses:SendEmail"
+      Resource: "*"
+
+functions:
+#get forums
+  getforums:
+    handler: forum/getForums.get
+    events:
+      - http:
+          path: forums
+          method: get
+          cors: true
+
+#get chat messages by chat ID
+  getMessagesById:
+    handler: chatMessages/getMessagesById.get
+    events:
+      - http:
+          path: chatMessages/{id}
+          method: get
+          cors: true
+
+#post message from user
+  postMessage:
+    handler: chatMessages/postMessage.create
+    events:
+      - http:
+          path: chatMessages
+          method: post
+          cors: true          
+
+#new user
+  newUser:
+    handler: users/createUser.add
+    events:
+      - http:
+          path: users
+          method: post
+          cors: true
+
+
+#get all users
+  getUsers:
+    handler: user/getUsers.list
+    events:
+      - http:
+          path: getUsers
+          method: get
+          cors: true
+        
+#check if user is authenticated
+  checkUserAuth:
+    handler: users/checkUserAuth.check
+    events:
+      - http:
+          path: login/{user}
+          method: get
+          cors: true
+
+
+resources:
+  Resources:
+    ForumsDynamoTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Delete
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:service}-forums
+
+    MessagesDynamoTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Delete
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:service}-messages
+    
+    UsersDynamoTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Delete
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:service}-users
