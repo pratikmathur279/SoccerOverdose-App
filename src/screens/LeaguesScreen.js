@@ -8,9 +8,11 @@ import LeaguesBuilder from '../components/LeaguesBuilder/LeaguesBuilder';
 import CustomHeader from '../navigation/CustomHeader';
 
 export default class LeaguesScreen extends React.Component {
-  contructor(){
+  constructor(props){
+    super(props);
     this.refresh = this.refresh.bind(this);
   }
+
   static navigationOptions = {
     title: 'Top Leagues',
     headerStyle: { backgroundColor: '#2196f3', height: 50 },
@@ -30,7 +32,7 @@ export default class LeaguesScreen extends React.Component {
     return (
         <PTRView onRefresh={this.refresh()}>
           <ScrollView style={styles.container}>
-            <LeaguesBuilder />
+            <LeaguesBuilder {...this.props}/>
           </ScrollView>
         </PTRView>
       

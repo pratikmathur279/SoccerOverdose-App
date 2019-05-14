@@ -5,8 +5,8 @@ import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-nati
 const ChatMessages = (props) =>{
     const buildItem = (item) => {
         return(
-            <View style={styles.ForumItem}>
-                <Text>{item.user} - {item.message}</Text>
+            <View >
+                <Text style={[ item.user === props.currentUser ? styles.CurrentForumItem: styles.ForumItem]}>{item.user} - {item.message}</Text>
             </View>
         )
     }
@@ -32,8 +32,23 @@ const styles = StyleSheet.create({
         height: 50,
         marginBottom: 20,
         paddingTop: 20,
-        backgroundColor: "#3B83C4",
-        color: '#fff'
+        backgroundColor: "#B3B3B3",
+        color: '#3B83C4',
+        // width: 'auto',
+        // maxWidth: '60%'
+    },
+    CurrentForumItem: {
+        height: 50,
+        marginBottom: 20,
+        paddingTop: 20,
+        textAlign: 'right',
+        color: '#fbfbfb',
+        backgroundColor: '#3B83C4',
+        // marginLeft: '40%',
+        // maxWidth: '60%',
+        // alignSelf: 'flex-start',
+        paddingRight: 10,
     }
+
 })
 export default ChatMessages;

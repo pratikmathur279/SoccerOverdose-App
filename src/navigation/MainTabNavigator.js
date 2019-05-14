@@ -11,6 +11,9 @@ import ProfileScreen from '../screens/ProfileScreen';
 import ForumScreen from '../screens/ForumScreen';
 import LoginScreen from '../screens/LoginScreen';
 import ChatScreen from '../screens/ChatScreen';
+import SelectedLeague from '../screens/SelectedLeague';
+
+import CreateForum from '../components/Forums/CreateForum';
 
 //HOME
 const HomeStack = createStackNavigator({
@@ -65,6 +68,7 @@ FixturesStack.navigationOptions = {
 //LEAGUES
 const LeaguesStack = createStackNavigator({
   Leagues: LeaguesScreen,
+  League: SelectedLeague
 });
 
 LeaguesStack.navigationOptions = {
@@ -110,6 +114,7 @@ ProfileStack.navigationOptions = {
 //FORUM
 const ForumStack = createStackNavigator({
   Forum: { screen: ForumScreen },
+  CreateForum: { screen: CreateForum},
   Chat: {
     screen: ChatScreen,
     title: 'Chat',
@@ -125,7 +130,8 @@ ForumStack.navigationOptions = {
   tabBarLabel: 'Forum',
   title: 'Forum',
   headerStyle: { backgroundColor: '#2196f3' },
-	headerTintColor: '#fff',
+  headerTintColor: '#fff',
+  // HeaderBackButton: { color: '#fff'},
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

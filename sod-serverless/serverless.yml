@@ -88,6 +88,14 @@ functions:
           method: post
           cors: true
 
+#create new forum
+  createForum:
+    handler: forum/createForum.create
+    events:
+      - http:
+          path: forum
+          method: post
+          cors: true          
 
 #get all users
   getUsers:

@@ -6,12 +6,13 @@ import League from '../League/League';
 const Leagues = (props) => {
     return(
         <View  style={styles.Leagues}>
-            {/* <View>
-                <Text style={styles.Heading}>Top Leagues</Text>
-            </View> */}
             <League id="PD" name="La Liga" code="ES" onClick={props.leagueClick}/>
             <League id="PL" name="Premier League" code="GB" onClick={props.leagueClick}/>
             <League id="FL1" name="Ligue 1" code="FR" onClick={props.leagueClick} />
+            <League id="BL1" name="Bundesliga" code="DE" onClick={props.leagueClick} />
+            <League id="SA" name="Serie A" code="IT" onClick={props.leagueClick} />
+            {/* <League id="CL" name="Champions League" code="" onClick={props.leagueClick} /> */}
+            <League id="DED" name="Eredivise" code="NL" onClick={props.leagueClick} />
         </View> 
     )
       

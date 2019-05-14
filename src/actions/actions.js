@@ -5,6 +5,7 @@ class Actions {
         axios(`https://zdlgr9pel3.execute-api.us-east-1.amazonaws.com/dev/forums`)
         .then((res) => {
             var data = res.data;
+            data.sort((a, b) => (a.date < b.date) ? 1 : -1);
             callback(data)
         })
     }
@@ -30,6 +31,13 @@ class Actions {
         console.log("here");
         axios.post('https://zdlgr9pel3.execute-api.us-east-1.amazonaws.com/dev/users', userData)
         .then((res)=>{
+            callback(res);
+        });
+    }
+
+    createForum(data, callback){
+        axios.post(`https://zdlgr9pel3.execute-api.us-east-1.amazonaws.com/dev/forum`, data)
+        .then((res)=> {
             callback(res);
         });
     }

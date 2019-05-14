@@ -151,7 +151,6 @@ export default class UserModal extends Component {
         >
           <View style={{ flex: 0.9, backgroundColor: "#C0C0C0" }}>
             <TouchableOpacity style={styles.CloseButton} onPress={this.toggleModal}>
-
               <Icon.Ionicons
                 name="ios-close"
                 size={32}
@@ -240,6 +239,7 @@ const styles = StyleSheet.create({
   CloseButton: {
     position: 'absolute',
     right: 10,
+    zIndex: 2000,
     top: 5
   }, 
   LogoContainer: {

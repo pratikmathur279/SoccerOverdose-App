@@ -4,6 +4,8 @@ import { ExpoConfigView } from '@expo/samples';
 import ForumsBuilder from '../components/Forums/ForumsBuilder';
 import Modal from "react-native-modal";
 
+import CreateForum from '../components/Forums/CreateForum';
+
 import {
   Text,
   StatusBar,
@@ -30,7 +32,9 @@ export default class ForumScreen extends React.Component {
         };
         this.actions = new Actions();
         this.openForum = this.openForum.bind(this);
+        this.getForums = this.getForums.bind(this);
         this.handleMessageChange = this.handleMessageChange.bind(this);
+        this.refresh = this.refresh.bind(this);
     }
     
     componentWillMount(){
@@ -42,19 +46,27 @@ export default class ForumScreen extends React.Component {
         })
     }
 
+    getForums(){
+        let state = Object.assign({}, this.state);
+        this.actions.getForums((data)=>{
+            state.forums = data;
+            this.setState(state);
+        })
+    }
+
     componentWillUnmount(){
-        console.log('unmounted');
         AsyncStorage.removeItem('userId');
     }
 
-    componentWillUpdate(){
-        console.log('mounted again');
+    refresh(data){
+        this.getForums();
     }
 
-    async openForum(e){
+    async openForum(id, title){
         const loggedin = ( await AsyncStorage.getItem('userId') ? true : false);
             this.props.navigation.navigate('Chat', {
-                item_id: e
+                item_id: id,
+                item_title: title
             });
     }
 
@@ -84,6 +96,12 @@ export default class ForumScreen extends React.Component {
     return (
         <View>
             <View>
+                <View style={styles.CreateForumButton}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate("CreateForum", { onRefresh: this.refresh })}>
+                        <Text style={styles.text}>Create Forum</Text>
+                    </TouchableOpacity>
+                </View>
+
                 <Text style={styles.Heading}>Click on the forum to open it</Text>
                 <View>
                     <ForumsBuilder 
@@ -101,6 +119,24 @@ export default class ForumScreen extends React.Component {
 const styles=StyleSheet.create({
     Button: {
         backgroundColor: "red"
+    },
+    CreateForumButton: {
+        marginTop: 10,
+        width: "30%",
+        marginLeft: "67%",
+        textAlign: "center",
+        alignContent: "center",
+        justifyContent: "center",
+        alignItem: "center",
+        backgroundColor: "#428AF8",
+        paddingVertical: 12,
+        borderRadius: 4,
+        borderColor: "rgba(255,255,255,0.7)",
+        borderWidth: StyleSheet.hairlineWidth
+    },
+    text: {
+        textAlign: 'center',
+        color: "white"
     },
     Heading: {
         textAlign: 'center',

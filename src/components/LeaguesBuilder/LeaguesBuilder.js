@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 
-import {Text, View} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Leagues from './Leagues/Leagues';
-import Standings from '../Standings/Standings.js';
 
 class LeaguesBuilder extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             standings: [],
             competitionName: ''
         };
         // this.actions = new Actions();
         this.leagueClick = this.leagueClick.bind(this);
+        this.refresh = this.refresh.bind(this);
       }
 
       leagueClick(e){
@@ -28,24 +28,66 @@ class LeaguesBuilder extends Component {
         .then((responseJson) => {
             var data = responseJson;
             let state = Object.assign({}, this.state);
+            state.e = e;
             state.standings = data.standings;
             state.competitionName = data.competition.name;
+
+            this.props.navigation.navigate('League', {
+                standings: data.standings,
+                competitionName: data.competition.name,
+                refresh: this.refresh
+            })
             this.setState(state);
             })
         }
 
-      componentWillMount(){
-          
+      refresh(){
+          console.log("leaguesbuilder refresh");
+          console.log(this.state.e);
+          this.leagueClick(this.state.e);
       }
 
     render () {
         return (
             <View>
-                <Leagues leagueClick={this.leagueClick} />
-                <Standings competitionName={this.state.competitionName} standings={this.state.standings}/>
+                <Leagues onRefresh={this.refresh}leagueClick={this.leagueClick} />
             </View>
         );
     }
 }
 
 export default LeaguesBuilder;
+
+const styles = StyleSheet.create({
+    Message: {
+      flexDirection: 'row',
+      flex: 0.9
+    },
+    MessageBox: {
+      height: 0.6,
+      flex: 0.7,
+    },
+    tabBarInfoContainer: {
+      position: 'absolute',
+      bottom: 0,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      height: 80,
+      left: 0,
+      right: 0,
+      ...Platform.select({
+        ios: {
+          shadowColor: 'black',
+          shadowOffset: { height: -3 },
+          shadowOpacity: 0.1,
+          shadowRadius: 3,
+        },
+        android: {
+          elevation: 20,
+        },
+      }),
+      alignItems: 'center',
+      backgroundColor: '#fbfbfb',
+      paddingVertical: 20,
+    },
+  })

@@ -1,14 +1,15 @@
 import React from 'react';
 
 
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, RefreshControl} from 'react-native';
 // import classes from './Standings.css';
 import { Table, Row, Rows } from 'react-native-table-component';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const Standings = (props)=> {
+    console.log(props.count);
+
     if(props.standings.length > 0){
-        console.log(props.standings[0].table[0]);
 
         const flexArr = [0.8, 3.7, 0.8, 0.8, 0.8, 0.8, 1, 1];
 
@@ -22,7 +23,12 @@ const Standings = (props)=> {
         // const widthArr = [25, 140, 30, 35, 30, 30, 40, 40]
         const tableHead=['', 'Team', 'PL', 'W', 'D', 'L', 'GD', 'Pts'];
         return(
-            <ScrollView vertical={true}>
+            <ScrollView refreshControl={
+                <RefreshControl
+                  refreshing={props.refreshing}
+                  onRefresh={props.onRefresh}
+                />
+              }vertical={true}>
                 <View style={styles.Standings}>
                     <Text style={styles.header}>{props.competitionName}</Text>
                     <Row  data={tableHead} style={styles.head} textStyle={styles.text} flexArr={flexArr} />

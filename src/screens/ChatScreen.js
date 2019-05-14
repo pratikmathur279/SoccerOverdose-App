@@ -16,6 +16,7 @@ export default class ChatScreen extends React.Component {
           message: '',
           height: 1,
           chatID: '',
+          title: '',
           chatMessages: []
         };
         this.keyboardOpen = this.keyboardOpen.bind(this);
@@ -32,6 +33,7 @@ export default class ChatScreen extends React.Component {
         console.log('user is ' +user);
         let state = Object.assign({}, this.state);
         state.chatID = this.props.navigation.getParam('item_id');
+        state.title = this.props.navigation.getParam('item_title');
         this.actions.getChatMessages(state.chatID, (res)=>{
           state.chatMessages = res;
           state.user = user;
@@ -98,8 +100,8 @@ export default class ChatScreen extends React.Component {
   render() {
     return (
       <View style={{flex: this.state.height}}>
-        <Text>Chat</Text>
-        <ChatMessages messages={this.state.chatMessages} />
+        <Text>{this.state.title}</Text>
+        <ChatMessages currentUser={this.state.user} messages={this.state.chatMessages} />
 
         <View style={styles.tabBarInfoContainer}>
         <KeyboardListener
