@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Text, View, Dimensions, StyleSheet, Image, TextInput, TouchableOpacity, AsyncStorage } from "react-native";
+import { Button, Text, View, Platform, Dimensions, StyleSheet, Image, TextInput, TouchableOpacity, AsyncStorage } from "react-native";
 import Modal from "react-native-modal";
 import LoginForm from '../LoginForm/LoginForm';
 import RegisterForm from '../RegisterForm/RegisterForm';

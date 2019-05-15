@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
         elevation: 20,
       },
     }),
-    alignItem: 'center',
+    alignItems: 'center',
     backgroundColor: '#fbfbfb',
     paddingVertical: 20,
   },

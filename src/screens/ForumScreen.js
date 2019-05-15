@@ -134,7 +134,7 @@ const styles=StyleSheet.create({
         textAlign: "center",
         alignContent: "center",
         justifyContent: "center",
-        alignItem: "center",
+        alignItems: "center",
         backgroundColor: "#428AF8",
         paddingVertical: 12,
         borderRadius: 4,

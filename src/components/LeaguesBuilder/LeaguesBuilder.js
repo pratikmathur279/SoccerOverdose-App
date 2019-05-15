@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Platform} from 'react-native';
 import Leagues from './Leagues/Leagues';
 
 class LeaguesBuilder extends Component {
@@ -42,8 +42,6 @@ class LeaguesBuilder extends Component {
         }
 
       refresh(){
-          console.log("leaguesbuilder refresh");
-          console.log(this.state.e);
           this.leagueClick(this.state.e);
       }
 

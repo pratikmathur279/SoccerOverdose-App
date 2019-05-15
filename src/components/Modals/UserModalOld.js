@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   },
   FlexContainer: {
     marginTop: 20,
-    alignItem: 'center'
+    alignItems: 'center'
   },
   CloseButton: {
     position: 'absolute',
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   }, 
   LogoContainer: {
     justifyContent: 'center',
-    alignItem: 'center',
+    alignItems: 'center',
     marginHorizontal: 30
   },
   LogoImage: {

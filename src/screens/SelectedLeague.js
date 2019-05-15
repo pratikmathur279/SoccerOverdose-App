@@ -23,7 +23,6 @@ export default class SelectedLeague extends React.Component {
     }
 
     componentWillMount(){
-      console.log("came here "+this.state.count)
       let state = Object.assign({}, this.state);
       state.standings = this.props.navigation.getParam('standings');
       state.competitionName = this.props.navigation.getParam('competitionName');
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
         elevation: 20,
       },
     }),
-    alignItem: 'center',
+    alignItems: 'center',
     backgroundColor: '#fbfbfb',
     paddingVertical: 20,
   },

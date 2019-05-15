@@ -2,14 +2,15 @@ import React from 'react';
 
 import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
 
-import AutoScroll from 'react-native-auto-scroll';
+// import AutoScroll from 'react-native-auto-scroll';
 
 const ChatMessages = (props) =>{
     
     const buildItem = (item) => {
         return(
             <View style={[ item.user === props.currentUser ? styles.CurrentForumItem: styles.ForumItem]}>
-                <Text>{item.user} - {item.message}</Text>
+                <Text style={styles.userHeading}>{item.user}</Text>
+                <Text>{item.message}</Text>
             </View>
         )
     }
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
         color: '#3B83C4',
         paddingLeft: 10,
         borderRadius: 10,
-        flexDirection:'row',
+        flexDirection:'column',
         paddingRight: 10,
         maxWidth: '60%',
         marginRight: '40%',
@@ -63,8 +64,11 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         paddingLeft: 10,
         borderRadius: 10,
-        flexDirection:'row',
+        flexDirection:'column',
         paddingRight: 10,
+    },
+    userHeading: {
+        fontSize: 16,
     }
 
 })

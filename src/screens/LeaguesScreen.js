@@ -20,22 +20,17 @@ export default class LeaguesScreen extends React.Component {
   };
 
   refresh(){
-    console.log("refresh");
     return new Promise((resolve) => {
       setTimeout(()=>{
-        console.log("refreshed");
         resolve()}, 2000)
     });
   }
 
   render() {
     return (
-        <PTRView onRefresh={this.refresh()}>
           <ScrollView style={styles.container}>
             <LeaguesBuilder {...this.props}/>
           </ScrollView>
-        </PTRView>
-      
     );
   }
 }

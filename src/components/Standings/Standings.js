@@ -7,7 +7,6 @@ import { Table, Row, Rows } from 'react-native-table-component';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const Standings = (props)=> {
-    console.log(props.count);
 
     if(props.standings.length > 0){
 

@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   welcomeContainer: {
-    alignItem: 'center',
+    alignItems: 'center',
     marginTop: 10,
     marginBottom: 20,
   },
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     marginLeft: -10,
   },
   getStartedContainer: {
-    alignItem: 'center',
+    alignItems: 'center',
     marginHorizontal: 50,
   },
   homeScreenFilename: {
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
         elevation: 20,
       },
     }),
-    alignItem: 'center',
+    alignItems: 'center',
     backgroundColor: '#fbfbfb',
     paddingVertical: 20,
   },
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
   },
   helpContainer: {
     marginTop: 15,
-    alignItem: 'center',
+    alignItems: 'center',
     flex: 0.5
   },
   helpLink: {
