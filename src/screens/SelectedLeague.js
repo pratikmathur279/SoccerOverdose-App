@@ -23,21 +23,27 @@ export default class SelectedLeague extends React.Component {
     }
 
     componentWillMount(){
+      console.log("came here "+this.state.count)
       let state = Object.assign({}, this.state);
       state.standings = this.props.navigation.getParam('standings');
       state.competitionName = this.props.navigation.getParam('competitionName');
       this.setState(state);
     }
+    
+    componentWillReceiveProps(){
+      console.log("came here first"+this.state.count)
+    }
 
     onRefresh(){
       console.log('refresh');
       this.setState({ refreshing: true});
-      this.props.navigation.goBack();
-      this.props.navigation.state.params.refresh();
-      // setTimeout(()=>{
-      //   this.setState({ count: this.state.count+1, refreshing: false });
-      //   this.forceUpdate();
-      // },2000);
+      
+      setTimeout(()=>{
+        this.setState({ count: this.state.count+1, refreshing: false });
+        // this.props.navigation.goBack();
+        this.props.navigation.state.params.refresh();
+        this.forceUpdate();
+      }, 2000);
       
     }
 

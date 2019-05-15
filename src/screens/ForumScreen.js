@@ -37,13 +37,14 @@ export default class ForumScreen extends React.Component {
         this.refresh = this.refresh.bind(this);
     }
     
-    componentWillMount(){
+    async componentWillMount(){
         console.log("mounted");
         let state = Object.assign({}, this.state);
-        this.actions.getForums((data)=>{
-            state.forums = data;
-            this.setState(state);
-        })
+        let temp = (await AsyncStorage.getItem('userId') ? true : false ) ;
+            this.actions.getForums((data)=>{
+                state.forums = data;
+                this.setState(state);
+            })
     }
 
     getForums(){
@@ -95,6 +96,11 @@ export default class ForumScreen extends React.Component {
 
     return (
         <View>
+            {/* {console.log(this.state.loggedIn)}
+            {!this.state.loggedIn 
+            ? 
+                <Text>You're not logged in. Please login to continue</Text>    
+                :  */}
             <View>
                 <View style={styles.CreateForumButton}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate("CreateForum", { onRefresh: this.refresh })}>
@@ -111,6 +117,7 @@ export default class ForumScreen extends React.Component {
                     />
                 </View>
             </View>
+            {/* } */}
         </View>
     );
   }
