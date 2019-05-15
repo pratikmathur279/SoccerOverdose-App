@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         elevation: 20,
       },
     }),
-    alignItems: 'center',
+    alignItem: 'center',
     backgroundColor: '#fbfbfb',
     paddingVertical: 20,
   },

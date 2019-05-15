@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   FixturesContainer: {
     flex: 1,
     textAlign: 'center',
-    alignItems: 'center',
+    alignItem: 'center',
     paddingTop: 15,
     backgroundColor: '#fff',
   },
