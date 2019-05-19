@@ -58,7 +58,7 @@ export default class UserModal extends Component {
     let state = Object.assign({}, this.state);
 
     this.actions.checkUserAuth(this.state.Login.username, async (res)=>{
-      if(res){
+      if(res.isActive){
         console.log(res);
           let temp = await AsyncStorage.setItem('userId', (this.state.Login.username));
           console.log(temp);
@@ -208,10 +208,6 @@ export default class UserModal extends Component {
             </View>  
 
           }
-
-
-
-            
 
           </View>
         </Modal>

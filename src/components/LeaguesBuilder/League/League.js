@@ -9,7 +9,7 @@ const League = (props) => {
         
         <TouchableHighlight style={styles.Touch}>
         <View style={styles.Component}>
-            <Flag code={props.code} style={styles.Flag} />
+            <Flag code={props.code} size={props.size} style={styles.Flag} />
             <Text style={styles.League} id={props.id} onPress={()=>props.onClick(props.id)}>{props.name}</Text>
             </View>    
         </TouchableHighlight>

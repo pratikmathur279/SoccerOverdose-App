@@ -29,6 +29,7 @@ module.exports.add = (event, context, callback) => {
       email: data.email,
       username: data.username,
       password: data.password,
+      isAdmin: false,
       // passwordHash: hashPassword,
       favorite_team: data.favorite_team,
       isActive: true,

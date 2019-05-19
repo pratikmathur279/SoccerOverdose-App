@@ -25,13 +25,13 @@ console.log(event.pathParameters.user);
       return;
     }
 
-    let exists = false;
+    let exists = {};
     // console.log(result.Items);
     const data = (result.Items);
     console.log(data.length);
     data.forEach((element) => {
       if(element.username == event.pathParameters.user){
-          exists = true;
+          exists = element;
       }
     })
     console.log(exists);
@@ -42,7 +42,7 @@ console.log(event.pathParameters.user);
         'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true,
       },
-      body: exists,
+      body: JSON.stringify(exists),
     };
     callback(null, response);
   });

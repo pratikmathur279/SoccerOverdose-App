@@ -19,6 +19,19 @@ class Actions {
         })
     }
 
+    getFixturesByCompetition(team, callback){
+        axios(`https://api.football-data.org/v2/competitions/${team}/matches?matchday=38`, {
+            method: 'GET',
+            headers: {
+                'X-Auth-Token' : '408bb5e0c24c41c4a641373c5099c42f'
+            }
+        })
+        .then((res)=>{
+            // console.log(res.data);
+            callback(res.data);
+        })
+    }
+    
     sendMessage(messagePackage, callback){
         axios.post(`https://zdlgr9pel3.execute-api.us-east-1.amazonaws.com/dev/chatMessages`, messagePackage)
         .then((res) => {
