@@ -11,7 +11,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import ForumScreen from '../screens/ForumScreen';
 import LoginScreen from '../screens/LoginScreen';
 import ChatScreen from '../screens/ChatScreen';
-import SelectedLeague from '../screens/SelectedLeague';
+import SelectedLeague from '../components/SelectedLeague/SelectedLeague';
 
 import CreateForum from '../components/Forums/CreateForum';
 
@@ -82,12 +82,12 @@ LeaguesStack.navigationOptions = {
 };
 
 //RESULTS
-const ResultsStack = createStackNavigator({
-  Results: ResultsScreen,
+const LoginStack = createStackNavigator({
+  Login: LoginScreen,
 });
 
-ResultsStack.navigationOptions = {
-  tabBarLabel: 'Results',
+LoginStack.navigationOptions = {
+  tabBarLabel: 'Login',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -145,7 +145,7 @@ export default createBottomTabNavigator({
   HomeStack,
   FixturesStack,
   LeaguesStack,
-  ResultsStack,
+  LoginStack,
   ForumStack
   // ProfileStack,
 }, { animationEnabled: true});

@@ -32,12 +32,28 @@ class LeaguesBuilder extends Component {
             state.standings = data.standings;
             state.competitionName = data.competition.name;
 
-            this.props.navigation.navigate('League', {
+            fetch(`https://api.football-data.org/v2/competitions/${league}`, {
+              method: 'GET',
+              headers: {
+                'X-Auth-Token' : '408bb5e0c24c41c4a641373c5099c42f'
+              }
+            })
+            .then((response)=> response.json())
+            .then((responseJson) => {
+
+              state.seasons = responseJson;
+              var seasons = responseJson;
+
+              this.props.navigation.navigate('League', {
                 standings: data.standings,
                 competitionName: data.competition.name,
+                seasons: seasons,
                 refresh: this.refresh
             })
             this.setState(state);
+            });
+
+            
             })
         }
 
@@ -48,7 +64,7 @@ class LeaguesBuilder extends Component {
     render () {
         return (
             <View>
-                <Leagues onRefresh={this.refresh}leagueClick={this.leagueClick} />
+                <Leagues onRefresh={this.refresh} leagueClick={this.leagueClick} />
             </View>
         );
     }

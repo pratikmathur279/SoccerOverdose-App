@@ -3,10 +3,12 @@ import KeyboardListener from 'react-native-keyboard-listener';
 
 import { Text, View, StyleSheet, Platform, Dimensions, TextInput, KeyboardAvoidingView, Keyboard, AsyncStorage } from 'react-native';
 import { Input } from 'react-native-elements';
-import TabBarIcon from '../components/TabBarIcon';
+import TabBarIcon from '../TabBarIcon';
+import { TabView, SceneMap } from 'react-native-tab-view';
 import { Icon } from 'expo';
-import Standings from '../components/Standings/Standings';
-import Actions from '../actions/actions';
+import Standings from '../Standings/Standings';
+import Seasons from '../Seasons/Seasons';
+import Actions from '../../actions/actions';
 
 export default class SelectedLeague extends React.Component {
 
@@ -16,7 +18,13 @@ export default class SelectedLeague extends React.Component {
           standings: [],
           count: 0,
           competitionName: '',
-          refreshing: false
+          refreshing: false,
+          index: 0,
+          routes: [
+            { key: 'first', title: 'Standings' },
+            { key: 'second', title: 'Seasons' },
+            { key: 'third', title: 'Stats' },
+          ],
         };
         this.actions = new Actions();
         this.onRefresh = this.onRefresh.bind(this);
@@ -26,6 +34,7 @@ export default class SelectedLeague extends React.Component {
       let state = Object.assign({}, this.state);
       state.standings = this.props.navigation.getParam('standings');
       state.competitionName = this.props.navigation.getParam('competitionName');
+      state.seasons = this.props.navigation.getParam('seasons');
       this.setState(state);
     }
     
@@ -53,10 +62,29 @@ export default class SelectedLeague extends React.Component {
       });
 
   render() {
-    return (
+    const FirstRoute = () => (
       <View>
         <Standings count={this.state.count} onRefresh={this.onRefresh} refreshing={this.state.refreshing} competitionName={this.state.competitionName} standings={this.state.standings}/>
-    </View>
+      </View>
+    );
+    const SecondRoute = () => (
+      <View style={[styles.scene]} >
+      <Seasons seasons={this.state.seasons} />
+      </View>
+    );
+    return (
+
+      <TabView
+        navigationState={this.state}
+        lazy={true}
+        renderScene={SceneMap({
+          first: FirstRoute,
+          second: SecondRoute,
+          third: SecondRoute,
+        })}
+        onIndexChange={index => this.setState({ index })}
+        initialLayout={{ width: Dimensions.get('window').width }}
+      />
     );
   }
 }
