@@ -14,7 +14,7 @@
     "@expo/samples": "2.1.1",
     "@valdio/react-native-scrollable-tabview": "^0.8.11",
     "aws-sdk": "^2.453.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bcryptjs-then": "^1.0.1",
     "expo": "^32.0.0",
     "jsonwebtoken": "^8.5.1",
