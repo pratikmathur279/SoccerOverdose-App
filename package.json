@@ -13,7 +13,7 @@
   "dependencies": {
     "@expo/samples": "2.1.1",
     "@valdio/react-native-scrollable-tabview": "^0.8.11",
-    "aws-sdk": "^2.453.0",
+    "aws-sdk": "^2.814.0",
     "axios": "^0.18.0",
     "bcryptjs-then": "^1.0.1",
     "expo": "^32.0.0",
