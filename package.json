@@ -16,7 +16,7 @@
     "aws-sdk": "^2.453.0",
     "axios": "^0.18.0",
     "bcryptjs-then": "^1.0.1",
-    "expo": "^32.0.0",
+    "expo": "^46.0.14",
     "jsonwebtoken": "^8.5.1",
     "react": "^16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
